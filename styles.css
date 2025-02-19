@@ -2,21 +2,21 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;  /* This ensures the gallery takes up the full viewport height */
-    margin: 0 auto;     /* Changed to remove top margin */
-    padding: 20px;      /* Adds some spacing around the edges */
-    width: 100%;
+    gap: 20px;  /* Consistent spacing between items */
+    max-width: 1200px;  /* Limit max width for larger screens */
+    margin: 0 auto;
+    padding: 20px;
+    width: calc(100% - 40px);  /* Account for padding */
 }
 
 .gallery-image {
     width: 200px;
     height: 200px;
     object-fit: cover;
-    margin: 10px;
     cursor: pointer;
     transition: transform 0.2s, filter 0.3s, opacity 0.3s;
     opacity: 1;
+    margin: 0;  /* Remove margin since we're using gap */
 }
 
 .gallery-image.loading {
@@ -73,21 +73,31 @@ body {
 */
 
 .gallery-title {
-    color: white;  /* Changed from #FFA500 back to white */
+    color: white;
     text-align: center;
     font-size: 2rem;
     font-family: Arial, sans-serif;
-    padding: 20px 0;
+    padding: 20px 0 10px 0;  /* Reduced bottom padding */
     margin: 0;
+}
+
+.gallery-subtitle {
+    color: white;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding-bottom: 20px;
 }
 
 header {
     width: 100%;
     display: flex;
+    flex-direction: column;  /* Stack title and subtitle vertically */
     justify-content: center;
     align-items: center;
     padding: 1rem 0;
     margin: 0.5rem 0;
     position: relative;
-    z-index: 1001;  /* Above the loading elements */
+    z-index: 1001;
 }

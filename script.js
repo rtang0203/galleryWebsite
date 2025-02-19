@@ -103,27 +103,18 @@ function createImage(fileName) {
     });
 }
 
-// Function to insert image in sorted position
-function insertSorted(img, colors) {
-    if (!colors) {
-        galleryElement.appendChild(img);
-        return;
-    }
-
-    const category = getColorCategory(colors[0]);
-    const brightness = getBrightness(colors[0]);
-    
-    img.dataset.category = category;
-    img.dataset.brightness = brightness;
-    img.dataset.quickColor = JSON.stringify(colors[0]);
+// Function to insert images in sorted order
+function insertSorted(newImages) {
+    if (newImages.length === 0) return;
 
     const fragment = document.createDocumentFragment();
-    const images = Array.from(galleryElement.children);
+    const existingImages = Array.from(galleryElement.children);
     
-    images.forEach(image => fragment.appendChild(image));
-    fragment.appendChild(img);
+    // Combine existing and new images
+    const allImages = [...existingImages, ...newImages];
     
-    const sortedImages = Array.from(fragment.children).sort((a, b) => {
+    // Sort all images at once
+    const sortedImages = allImages.sort((a, b) => {
         const catA = a.dataset.category;
         const catB = b.dataset.category;
         
@@ -139,8 +130,26 @@ function insertSorted(img, colors) {
         return parseFloat(a.dataset.brightness) - parseFloat(b.dataset.brightness);
     });
 
+    // Add all images to fragment
+    sortedImages.forEach(image => fragment.appendChild(image));
+    
+    // Single DOM update
     galleryElement.textContent = '';
-    sortedImages.forEach(image => galleryElement.appendChild(image));
+    galleryElement.appendChild(fragment);
+}
+
+// Function to prepare image with color data
+function prepareImage(img, colors) {
+    if (!colors) return img;
+
+    const category = getColorCategory(colors[0]);
+    const brightness = getBrightness(colors[0]);
+    
+    img.dataset.category = category;
+    img.dataset.brightness = brightness;
+    img.dataset.quickColor = JSON.stringify(colors[0]);
+
+    return img;
 }
 
 // Function to check if we should load more images
@@ -158,12 +167,15 @@ async function loadNextBatch() {
     const batch = currentImageQueue.splice(0, IMAGES_PER_BATCH);
     const batchPromises = batch.map(fileName => createImage(fileName));
     
-    const results = await Promise.all(batchPromises);
-    results.forEach(({ img, colors }) => {
-        insertSorted(img, colors);
-    });
-    
-    isLoading = false;
+    try {
+        const results = await Promise.all(batchPromises);
+        const preparedImages = results.map(({ img, colors }) => prepareImage(img, colors));
+        insertSorted(preparedImages);
+    } catch (error) {
+        console.error('Error loading batch:', error);
+    } finally {
+        isLoading = false;
+    }
     
     // If we're still near the bottom after loading, load more
     if (shouldLoadMore() && currentImageQueue.length > 0) {
