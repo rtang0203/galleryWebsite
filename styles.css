@@ -1,0 +1,93 @@
+#gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;  /* This ensures the gallery takes up the full viewport height */
+    margin: 0 auto;     /* Changed to remove top margin */
+    padding: 20px;      /* Adds some spacing around the edges */
+    width: 100%;
+}
+
+.gallery-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.3s, opacity 0.3s;
+    opacity: 1;
+}
+
+.gallery-image.loading {
+    filter: blur(5px);
+    opacity: 0.6;
+}
+
+.gallery-image:hover {
+    transform: scale(1.05);
+}
+
+/* Add this to ensure the body doesn't add unwanted margins */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+/* Popup styles */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1002;  /* Higher than header's 1001 */
+    cursor: pointer;
+}
+
+.popup-image {
+    position: fixed;
+    top: 50%;  /* Adjusted back to center since no caption */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90%;
+    max-height: 90vh;  /* Increased since no caption */
+    object-fit: contain;
+}
+
+/* Commented out but preserved for future use
+.popup-caption {
+    position: fixed;
+    top: calc(45% + 43vh);
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 10px;
+}
+*/
+
+.gallery-title {
+    color: white;  /* Changed from #FFA500 back to white */
+    text-align: center;
+    font-size: 2rem;
+    font-family: Arial, sans-serif;
+    padding: 20px 0;
+    margin: 0;
+}
+
+header {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    margin: 0.5rem 0;
+    position: relative;
+    z-index: 1001;  /* Above the loading elements */
+}
