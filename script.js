@@ -108,13 +108,9 @@ function insertSorted(newImages) {
     if (newImages.length === 0) return;
 
     const fragment = document.createDocumentFragment();
-    const existingImages = Array.from(galleryElement.children);
     
-    // Combine existing and new images
-    const allImages = [...existingImages, ...newImages];
-    
-    // Sort all images at once
-    const sortedImages = allImages.sort((a, b) => {
+    // Sort only the new batch of images
+    const sortedNewImages = newImages.sort((a, b) => {
         const catA = a.dataset.category;
         const catB = b.dataset.category;
         
@@ -130,11 +126,10 @@ function insertSorted(newImages) {
         return parseFloat(a.dataset.brightness) - parseFloat(b.dataset.brightness);
     });
 
-    // Add all images to fragment
-    sortedImages.forEach(image => fragment.appendChild(image));
+    // Add sorted new images to fragment
+    sortedNewImages.forEach(image => fragment.appendChild(image));
     
-    // Single DOM update
-    galleryElement.textContent = '';
+    // Append the new batch to the gallery
     galleryElement.appendChild(fragment);
 }
 
