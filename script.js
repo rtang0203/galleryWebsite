@@ -191,33 +191,16 @@ window.addEventListener('scroll', () => {
 });
 
 // Load and process images
-fetch('images/')
-    .then(response => response.text())
-    .then(data => {
-        const parser = new DOMParser();
-        const htmlDoc = parser.parseFromString(data, 'text/html');
-        const links = htmlDoc.getElementsByTagName('a');
+function loadImages() {
+    // Use the imageFiles array from image-list.js
+    currentImageQueue = [...imageFiles];
+    
+    // Load first batch
+    loadNextBatch();
+}
 
-        // Queue up all image loads
-        for (let link of links) {
-            const href = link.getAttribute('href');
-            if (!href) continue;
-            
-            const fileName = href.split('/').pop();
-            if (!fileName) continue;
-            
-            const fileExtension = fileName.split('.').pop().toLowerCase();
-            if (imageExtensions.includes(fileExtension)) {
-                currentImageQueue.push(fileName);
-            }
-        }
-
-        // Load first batch
-        loadNextBatch();
-    })
-    .catch(error => {
-        console.error('Gallery loading error:', error);
-    });
+// Initialize gallery
+loadImages();
 
 // Close popup when clicking overlay
 popupOverlay.addEventListener('click', function() {
