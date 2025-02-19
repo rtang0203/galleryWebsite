@@ -185,10 +185,19 @@ window.addEventListener('scroll', () => {
     }
 });
 
+// Function to shuffle array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 // Load and process images
 function loadImages() {
-    // Use the imageFiles array from image-list.js
-    currentImageQueue = [...imageFiles];
+    // Use the imageFiles array from image-list.js and shuffle it
+    currentImageQueue = shuffleArray([...imageFiles]);
     
     // Load first batch
     loadNextBatch();
