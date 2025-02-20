@@ -8,7 +8,7 @@ const files = fs.readdirSync(imagesDir);
 // Filter for image files
 const imageFiles = files.filter(file => {
     const ext = path.extname(file).toLowerCase();
-    return ['.jpg', '.jpeg', '.png', '.gif'].includes(ext);
+    return ['.jpg', '.jpeg', '.png', '.gif', '.webp'].includes(ext);
 });
 
 // Generate the JavaScript code
