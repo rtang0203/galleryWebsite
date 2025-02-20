@@ -22,8 +22,8 @@
 /* Mobile styles */
 @media screen and (max-width: 768px) {
     .gallery-image {
-        width: calc(50vw - 30px);  /* 50% of viewport width minus gaps */
-        height: calc(50vw - 30px);  /* Keep aspect ratio square */
+        width: calc(30vw - 30px);  /* Reduced from 50vw to 30vw */
+        height: calc(30vw - 30px);  /* Keep aspect ratio square */
     }
     
     #gallery {
@@ -36,8 +36,8 @@
 /* Small mobile styles */
 @media screen and (max-width: 480px) {
     .gallery-image {
-        width: calc(100vw - 30px);  /* Full width minus padding */
-        height: calc(100vw - 30px);  /* Keep aspect ratio square */
+        width: calc(75vw - 30px);  /* Reduced from 100vw to 75vw */
+        height: calc(75vw - 30px);  /* Keep aspect ratio square */
     }
 }
 
