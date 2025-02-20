@@ -1,7 +1,7 @@
 const galleryElement = document.getElementById('gallery');
 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 const colorThief = new ColorThief();
-const IMAGES_PER_BATCH = 20;
+const IMAGES_PER_BATCH = 40;
 let currentImageQueue = [];
 let isLoading = false;
 
