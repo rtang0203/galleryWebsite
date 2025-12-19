@@ -794,8 +794,6 @@ const imageFiles = [
   "IMG_5636.JPG",
   "IMG_5637.JPG",
   "IMG_5644 Large.jpeg",
-  "IMG_5647 Large.jpeg",
-  "IMG_5647.jpeg",
   "IMG_5653.JPG",
   "IMG_5656.JPG",
   "IMG_5657.JPG",
