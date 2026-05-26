@@ -6,3 +6,5 @@
 .Trashes
 ehthumbs.db
 Thumbs.db 
+# Generated at build time by generate-image-list.js
+image-list.js
