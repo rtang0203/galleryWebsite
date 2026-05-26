@@ -5,6 +5,18 @@ const IMAGES_PER_BATCH = 40;
 let currentImageQueue = [];
 let isLoading = false;
 
+// Netlify's Image CDN resizes/reformats images on the fly, but only runs on the
+// deployed site. Locally (file:// or localhost) fall back to the raw image so
+// previews still work.
+const isLocal = location.protocol === 'file:' ||
+    ['localhost', '127.0.0.1'].includes(location.hostname);
+
+function thumbUrl(fileName, width) {
+    const raw = `images/${fileName}`;
+    if (isLocal) return raw;
+    return `/.netlify/images?url=${encodeURIComponent('/' + raw)}&w=${width}&fm=webp&q=70`;
+}
+
 // Create popup elements
 const popupOverlay = document.createElement('div');
 popupOverlay.className = 'popup-overlay';
@@ -73,10 +85,12 @@ function createImage(fileName) {
         
         img.style.width = '40px';
         img.style.height = '40px';
-        img.src = `images/${fileName}`;
-        
+        // 400px = 2x the 200px grid box, for retina displays.
+        img.src = thumbUrl(fileName, 400);
+
         img.addEventListener('click', function() {
-            popupImage.src = this.src;
+            // Larger size for the full-screen popup.
+            popupImage.src = thumbUrl(fileName, 1600);
             // const filename = this.alt.split('.')[0];
             // popupCaption.textContent = filename;
             popupOverlay.style.display = 'block';
