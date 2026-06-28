@@ -81,20 +81,6 @@ body {
     object-fit: contain;
 }
 
-/* Commented out but preserved for future use
-.popup-caption {
-    position: fixed;
-    top: calc(45% + 43vh);
-    left: 50%;
-    transform: translateX(-50%);
-    color: white;
-    font-family: "Times New Roman", Times, serif;
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 10px;
-}
-*/
-
 .gallery-title {
     color: white;
     text-align: center;

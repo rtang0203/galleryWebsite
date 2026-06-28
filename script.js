@@ -1,5 +1,4 @@
 const galleryElement = document.getElementById('gallery');
-const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
 const colorThief = new ColorThief();
 const IMAGES_PER_BATCH = 40;
 let currentImageQueue = [];
@@ -22,10 +21,7 @@ const popupOverlay = document.createElement('div');
 popupOverlay.className = 'popup-overlay';
 const popupImage = document.createElement('img');
 popupImage.className = 'popup-image';
-// const popupCaption = document.createElement('div');
-// popupCaption.className = 'popup-caption';
 popupOverlay.appendChild(popupImage);
-// popupOverlay.appendChild(popupCaption);
 document.body.appendChild(popupOverlay);
 
 // Function to calculate brightness from RGB values
