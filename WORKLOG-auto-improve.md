@@ -14,3 +14,13 @@ Branch: `auto-improve/2026-06-28`
 - **Files:** `script.js`, `styles.css`
 - **Gate:** Baseline `node --check script.js && node --check generate-image-list.js` → **PASS**. Post-edit gate → **PASS**.
 - **Commit:** `4ac41cc`
+
+---
+
+### feat: add ESC key to close popup overlay
+
+- **What:** Added a `keydown` event listener on `document` that closes the popup overlay when Escape is pressed and the overlay is visible (`display === 'block'`).
+- **Why:** Standard UX pattern — users expect Escape to dismiss overlays/modals. Mirrors the existing click-to-close behavior on the overlay.
+- **Files:** `script.js`
+- **Gate:** Baseline `node --check script.js` → **PASS**. Post-edit → **PASS**. Browser test confirmed popup closes on ESC.
+- **Commit:** `88757bc`
