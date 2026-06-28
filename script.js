@@ -220,3 +220,10 @@ loadImages();
 popupOverlay.addEventListener('click', function() {
     popupOverlay.style.display = 'none';
 });
+
+// Close popup when pressing Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && popupOverlay.style.display === 'block') {
+        popupOverlay.style.display = 'none';
+    }
+});
